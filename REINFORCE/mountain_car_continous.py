@@ -44,8 +44,10 @@ class PolicyNetwork(nn.Module):
 
     def train_net(self):
         self.optim.zero_grad()
-        for gt, prob in zip(self.reward_history[::-1], self.prob_history[::-1]):
-            loss = -gt * prob
+        Gt = 0
+        for r, prob in zip(self.reward_history[::-1], self.prob_history[::-1]):
+            Gt = r + self.gamma * Gt
+            loss = -Gt * prob
             loss.backward()
         self.optim.step()
         self.reset_history()
