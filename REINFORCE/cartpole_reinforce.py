@@ -74,7 +74,9 @@ def main(render=False):
 
         while not done:
             action = pi.act(s)
-            s_prime, reward, done, info, _ = env.step(action)
+            s_prime, reward, terminate, truncated, info, _ = env.step(action)
+            if terminate or truncated:
+                done = True
             pi.save_reward_history(reward)
             s = s_prime
             score += reward
