@@ -24,6 +24,16 @@ Implement
 Average all Gt history. This is b (b has no effect to Rs)   
 When update Policy Network, we replace Gt to Gt - b (check cartpole_improved_reinforce.py line: 50-54)
 
+---
+
+## mountain_car_continuous_reinforce.py
+basic reinforce algorithm implement with MountainCarContinuous-v0 [Gym MountainCarContinuous](https://www.gymlibrary.dev/environments/classic_control/mountain_car_continuous/)
+<br>
+MountainCarContinuous has...
+- 2 Observation space (position of the car along x-axis, velocity of the car)
+- Continuous action space (range: -1~+1, action clipped by range, multiplied power of 0.0015)
+<br>
+<img src="./img/MountainCarContinuous.png"></img>
 
 ## Refer this
 code is very short (under 200 lines), no need to seperate file (like PolicyNet)
