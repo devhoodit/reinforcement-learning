@@ -3,6 +3,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
+from torch.distributions import Normal
 import numpy as np
 
 class PolicyNetwork(nn.Module):
@@ -20,8 +21,8 @@ class PolicyNetwork(nn.Module):
 
     def forward(self, x):
         x = F.relu(self.fc1(x))
-        x = torch.sigmoid(self.fc2(x))
-        return torch.Tensor(x)
+        x = self.fc2(x)
+        return x
     
     def save_reward_history(self, reward):
         self.reward_history.append(reward)
@@ -35,14 +36,16 @@ class PolicyNetwork(nn.Module):
 
     def act(self, state: np.ndarray):
         x = torch.from_numpy(state.astype(np.float32))
-        prob = self.forward(x)
-        self.save_prob_history(prob)
-        return prob.item()
+        output = self.forward(x)
+        pd = Normal(loc=output[0], scale=torch.sigmoid(output[1]))
+        action = pd.sample()
+        self.save_prob_history(pd.log_prob(action))
+        return action
 
     def train_net(self):
         self.optim.zero_grad()
         for gt, prob in zip(self.reward_history[::-1], self.prob_history[::-1]):
-            loss = -gt * torch.log(prob)
+            loss = -gt * prob
             loss.backward()
         self.optim.step()
         self.reset_history()
@@ -55,9 +58,9 @@ def main(render=False):
     else:
         env = gym.make('MountainCarContinuous-v0')
 
-    pi = PolicyNetwork(env.observation_space.shape[0], 1)
+    pi = PolicyNetwork(env.observation_space.shape[0], 2)
 
-    print_interval = 100
+    print_interval = 20
     score = 0.0
 
     for n_episode in range(1500):
@@ -68,8 +71,7 @@ def main(render=False):
             action = pi.act(s)
             action = np.array([action])
             s_prime, reward, terminate, truncated, _ = env.step(action)
-            if terminate or truncated:
-                done = True
+            done = terminate or truncated
             pi.save_reward_history(reward)
             s = s_prime
             score += reward
@@ -83,4 +85,4 @@ def main(render=False):
     env.close()
 
 if __name__ == "__main__":
-    main(True)
+    main()
