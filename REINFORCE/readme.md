@@ -35,5 +35,18 @@ MountainCarContinuous has...
 <br>
 <img src="./img/MountainCarContinuous.png"></img>
 
+<br>
+Implement   
+Policy Network Output size is 2   
+Output represent normal distribution, first output is mean, other is std   
+Sampling action from normal distribution  
+
+---
+
+## moutain_Car_continuous_improved_reinforce.py
+improved reinforce algorithm implement with MountainCarContinuous-v0 [Gym MountainCarContinuous](https://www.gymlibrary.dev/environments/classic_control/mountain_car_continuous/)
+
+---
+
 ## Refer this
 code is very short (under 200 lines), no need to seperate file (like PolicyNet)
