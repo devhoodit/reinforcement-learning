@@ -16,12 +16,12 @@ CartPole has...
 ## cartpole_improved_reinforce.py
 improved reinforce algorithm implement with CartPole-v1 [Gym CartPole](https://gymnasium.farama.org/environments/classic_control/cart_pole/)
 <br>
-What is improved reinforce algorithm?
-In basic reinforce, we update policy network with Gt
+What is improved reinforce algorithm?   
+In basic reinforce, we update policy network with Gt   
 But in improved reinforce, we update policy network with Gt normalization. This will help to Gt has lower variance
 <br>
-Implement
-Average all Gt history. This is b (b has no effect to Rs)
+Implement   
+Average all Gt history. This is b (b has no effect to Rs)   
 When update Policy Network, we replace Gt to Gt - b (check cartpole_improved_reinforce.py line: 50-54)
 
 
