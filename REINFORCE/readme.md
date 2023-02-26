@@ -36,10 +36,10 @@ MountainCarContinuous has...
 <img src="./img/MountainCarContinuous.png"></img>
 
 <br>
-Implement   
-Policy Network Output size is 2   
-Output represent normal distribution, first output is mean, other is std   
-Sampling action from normal distribution  
+Implement    
+Policy Network Output size is 2     
+Output represent normal distribution, first output is mean, other is std     
+Sampling action from normal distribution    
 
 ---
 
