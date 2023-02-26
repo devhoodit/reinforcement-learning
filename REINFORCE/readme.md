@@ -1,8 +1,8 @@
-### REINFORCE
+# REINFORCE
 
 ---
 
-#### cartpole_reinforce.py
+## cartpole_reinforce.py
 basic reinforce algorithm implement with CartPole-v1 [Gym CartPole](https://gymnasium.farama.org/environments/classic_control/cart_pole/)
 <br>
 CartPole has...
@@ -13,5 +13,5 @@ CartPole has...
 
 ---
 
-#### Refer this
+## Refer this
 code is very short (under 200 lines), no need to seperate file (like PolicyNet)
